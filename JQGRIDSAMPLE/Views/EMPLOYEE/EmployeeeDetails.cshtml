@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Employeee Details";
+}
+
+<h2>EmployeeeDetails</h2>
+
+<html>
+<head>
+    <title>JQGRID SAMPLE IN MVC RAZOR</title>
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.6.0/jquery.jqGrid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.6.0/i18n/grid.locale-en.js"></script>
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.6.0/jquery.jqGrid.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet" />
+    <style type="text/css">
+        .ui-jqgrid .ui-widget-header {
+            background-color: #336699;
+            background-image: none;
+            color: white;
+        }
+
+        .ui-jqgrid .ui-jqgrid-labels th.ui-th-column {
+            background-color: #FFCC66;
+            background-image: none;
+            color: #336699;
+            height: 30px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#myGrid").jqGrid({
+                url: '@Url.Action("getEmployeeDetails")',
+                datatype: 'json',
+                mytype: 'get',
+                colNames: ['ID','NAME', 'GENDER', 'MOBILE', 'LOCATION', 'COUNTRY'],
+                colModel: [
+{ name:'ID', width:'35px' },
+{ name:'NAME', width:'160px' },
+{ name:'GENDER' },
+{ name:'MOBILE' },
+{ name:'LOCATION' },
+{ name:'COUNTRY'}
+                           ],
+                pager: $('#myPager'),
+                rowNum: 5,
+                sortname: 'ID',
+                gridview: true,
+                sortorder: 'desc',
+                loadonce: true,
+                rowList: [5, 10, 20, 50],
+                width: 600,
+                height: 110,
+                viewrecords: true,
+                caption: 'Employee details in JQ Grid'
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <table id="myGrid"></table>
+        <div id="myPager"></div>
+    </div>
+    <div class="col-md-1 text-info">
+        <a href="@Url.Action("Add", "EMPLOYEE")" id="add"><i class="glyphicon glyphicon-plus" style="font-size: 30px; cursor: pointer;"></i></a>
+    </div>
+</body>
+</html>
